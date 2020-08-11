@@ -1,0 +1,147 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "Swagger ApiGenerateExample"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: www.metaweather.com
+basePath: /api/location
+schemes:
+  - https
+paths:
+  /search/:
+    get:
+      tags:
+      - "cities"
+      summary: "Finds cities by lattlong"
+      operationId: "findCitiesByLattlong"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "lattlong"
+        in: "query"
+        description: "lattlong"
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/City"
+        "400":
+          description: "Invalid status value"
+  /{id}:
+    get:
+      tags:
+      - "weather"
+      summary: ""
+      operationId: "getWeatherListByCity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CityDetailRs"
+        "400":
+          description: "Invalid status value"
+definitions:
+  City:
+    type: "object"
+    required:
+    - "distance"
+    - "title"
+    - "location_type"
+    - "woeid"
+    - "latt_long"
+    properties:
+      distance:
+        type: "integer"
+        format: "int32"
+      title:
+        type: "string"
+      location_type:
+        type: "string"
+      woeid:
+        type: "integer"
+        format: "int32"
+      latt_long:
+        type: "string"
+  Weather:
+    type: "object"
+    required:
+    - "id"
+    - "weather_state_name"
+    - "weather_state_abbr"
+    - "wind_direction_compass"
+    - "applicable_date"
+    - "min_temp"
+    - "max_temp"
+    - "the_temp"
+    - "wind_speed"
+    - "wind_direction"
+    - "air_pressure"
+    - "humidity"
+    - "visibility"
+    - "predictability"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      weather_state_name:
+        type: "string"
+      weather_state_abbr:
+        type: "string"
+      wind_direction_compass:
+        type: "string"
+      applicable_date:
+        type: "string"
+        format: "date"
+      min_temp:
+        type: "number"
+        format: "float64"
+      max_temp:
+        type: "number"
+        format: "float64"
+      the_temp:
+        type: "number"
+        format: "float64"
+      wind_speed:
+        type: "number"
+        format: "float64"
+      wind_direction:
+        type: "number"
+        format: "float64"
+      air_pressure:
+        type: "number"
+        format: "float64"
+      humidity:
+        type: "integer"
+        format: "int32"
+      visibility:
+        type: "number"
+        format: "float64"
+      predictability:
+        type: "integer"
+        format: "int32"
+  CityDetailRs:
+    type: "object"
+    required:
+    - "consolidated_weather"
+    properties:
+      consolidated_weather:
+        type: "array"
+        items:
+          $ref: "#/definitions/Weather"                 
