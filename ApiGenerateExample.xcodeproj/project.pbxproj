@@ -254,6 +254,8 @@
 			dependencies = (
 			);
 			name = ApiGenerateExample;
+			packageProductDependencies = (
+			);
 			productName = ApiGenerateExample;
 			productReference = D792787F24E3069400BECCDF /* ApiGenerateExample.app */;
 			productType = "com.apple.product-type.application";
@@ -282,6 +284,8 @@
 				Base,
 			);
 			mainGroup = D792787624E3069400BECCDF;
+			packageReferences = (
+			);
 			productRefGroup = D792788024E3069400BECCDF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

@@ -12,14 +12,18 @@ struct CityDetail: View {
     
     var body: some View {
         VStack {
-            Text(self.city.title)
-            if viewModel.isLoading && viewModel.weatherList.isEmpty {
-                Spacer()
-                FullScreenLoader()
-                Spacer()
-            } else {
-                List(viewModel.weatherList) { weather in
-                    WeatherRow(city: self.city, weather: weather)
+            NavBar(label: "Cities", font: .body)
+            VStack {
+                Text(self.city.title)
+                    .font(.largeTitle)
+                if viewModel.isLoading && viewModel.weatherList.isEmpty {
+                    Spacer()
+                    FullScreenLoader()
+                    Spacer()
+                } else {
+                    List(viewModel.weatherList) { weather in
+                        WeatherRow(city: self.city, weather: weather)
+                    }
                 }
             }
         }
@@ -47,7 +51,7 @@ struct WeatherRow: View {
     var body: some View {
         let dateValue = type(of: self).formatter.string(from: weather.applicableDate)
         
-        return NavigationLink(destination: WeatherDetail(title: "\(dateValue) \(city.title)", weather: weather)) {
+        return PushView(destination: WeatherDetail(dateValue: dateValue, cityName: city.title, weather: weather)) {
             Text(dateValue)
             Spacer()
             Text(weather.weatherStateName)

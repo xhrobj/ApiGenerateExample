@@ -7,12 +7,18 @@
 import SwiftUI
 
 struct WeatherDetail: View {
-    var title: String
+    var dateValue: String
+    var cityName: String
     var weather: Weather
+    
+    private func makeText(_ value: Double) -> String {
+        String(value.rounded(.down))
+    }
     
     var body: some View {
         VStack {
-            Text(title)
+            NavBar(label: cityName, font: .body)
+            Text("\(dateValue) \(cityName)")
                 .font(.largeTitle)
                 .padding(.bottom)
             VStack {
@@ -35,26 +41,28 @@ struct WeatherDetail: View {
                 HStack {
                     Text("Wind direction")
                     Spacer()
-                    Text(String(self.weather.windDirection))
+                    Text(makeText(self.weather.windDirection))
+                }.padding(.horizontal)
+                Divider()
+            }
+            VStack {
+                HStack {
+                    Text("Temperature")
+                    Spacer()
+                    Text(makeText(self.weather.theTemp))
                 }.padding(.horizontal)
                 Divider()
             }
             HStack {
-                Text("Temperature")
-                Spacer()
-                Text(String(self.weather.theTemp))
-            }.padding(.horizontal)
-            Divider()
-            HStack {
                 Text("Min temperature")
                 Spacer()
-                Text(String(self.weather.minTemp))
+                Text(makeText(self.weather.minTemp))
             }.padding(.horizontal)
             Divider()
             HStack {
                 Text("Max temperature")
                 Spacer()
-                Text(String(self.weather.maxTemp))
+                Text(makeText(self.weather.maxTemp))
             }.padding(.horizontal)
             Spacer()
         }

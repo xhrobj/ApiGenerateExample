@@ -18,11 +18,10 @@ struct CityList: View {
         
         return VStack {
             List (cities) { city in
-                    NavigationLink(destination: CityDetail(city: city)) {
+                    PushView(destination: CityDetail(city: city)) {
                         CityRow(city: city, viewModel: viewModel)
                     }
             }
-            .listStyle(GroupedListStyle())
             if viewModel.isLoading {
                 CellLoader()
             }

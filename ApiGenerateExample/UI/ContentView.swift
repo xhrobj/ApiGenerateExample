@@ -35,14 +35,16 @@ struct WeatherContainer: View {
     @EnvironmentObject var router: Router
     
     var body: some View {
-        VStack {
-            Picker("Options", selection: $router.selectedSegment) {
-                Text("America").tag(SegmentTag.america)
-                Text("Europe").tag(SegmentTag.europe)
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            
-            NavigationView {
+        NavigationStackView {
+            VStack {
+                Text("Cities")
+                    .font(.largeTitle)
+                    .padding()
+                Picker("Options", selection: $router.selectedSegment) {
+                    Text("America").tag(SegmentTag.america)
+                    Text("Europe").tag(SegmentTag.europe)
+                }
+                .pickerStyle(SegmentedPickerStyle())
                 CityList()
                     .navigationBarTitle(Text("Cities"))
             }
